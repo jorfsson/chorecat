@@ -8,6 +8,10 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from 'axios';
 
+//The UserInput component was originally for adding new users, but this functionality
+//no longer worked once we added user authentication. The goal for this component instead
+//is to invite new users by sending either a text via Twilio or an email via Mailchimp (or
+//another emailing tool).
 
 class UserInput extends React.Component {
   constructor(props) {

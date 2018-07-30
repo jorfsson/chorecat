@@ -8,6 +8,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from 'axios';
 
+//The ChoreInput component allows you to add new chores to your Calendar.
+//This will populate a new ChoreRow on the Calendar.
 
 class ChoreInput extends React.Component {
   constructor(props) {

@@ -6,7 +6,7 @@ import ButtonAppBar from './components/ButtonAppBar.jsx';
 import SignIn from './components/SignIn.jsx';
 import SignUp from './components/SignUp.jsx';
 
-
+//Index component contains routes
 class Index extends React.Component{
   constructor(props) {
     super(props);

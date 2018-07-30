@@ -11,6 +11,12 @@ import CloseIcon from '@material-ui/icons/Close';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+//The ButtonAppBar component contains navigation functionality, but still needs
+//to be fully built out. It is missing the Material UI Drawer component which should
+//contains links to navigate through the app as well as sign in/up/out. 
+//It currently shows Sign In/Up if user is not logged in. It will show Sign Out if
+//user is logged in.
+
 const styles = {
   root: {
     flexGrow: 1,

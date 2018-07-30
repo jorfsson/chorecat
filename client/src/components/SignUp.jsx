@@ -6,6 +6,12 @@ import TextField from '@material-ui/core/TextField';
 import CardActions from '@material-ui/core/CardActions';
 import axios from 'axios';
 
+//The SignUp component is the signup form aka for creating a new account.
+//It will redirect users to the app because signups result in sign-ins
+//thanks to the server. Successful sign-up will toggle isLoggedIn to true from the Index component and this
+//is passed down to the ButtonAppBar component so that SignUp only shows if the user
+//is not signed in.
+
 class SignUp extends React.Component {
   constructor(props) {
     super(props);
@@ -18,15 +24,14 @@ class SignUp extends React.Component {
   }
   
   handleSignUp(e) {
-    const context = this;
     const userObj = {
       name: this.username.value,
       pw: this.password.value
     }
     axios.post('api/users', userObj)
       .then( res => {
-        //redirects user to sign in
-        context.props.router.history.push("/app");
+        //redirects user to app
+        this.props.router.history.push("/app");
         this.props.onSignUpSubmit(e);
       })
       .catch( err => {

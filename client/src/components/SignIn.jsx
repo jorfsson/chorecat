@@ -6,7 +6,13 @@ import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
 import CardActions from '@material-ui/core/CardActions';
 
-export default class SignIn extends React.Component {
+//The SignIn component is the login form. It sends a POST request to the server.
+//The server will take care of checking the database for a matching user/pw combo.
+//Successful sign-in will toggle isLoggedIn to true from the Index component and this
+//is passed down to the ButtonAppBar component so that SignIn only shows if the user
+//is not signed in.
+
+class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,7 +24,6 @@ export default class SignIn extends React.Component {
   }
   
   handleSignIn(e) {
-    // const context = this;
     const userObj = {
       username: this.username.value,
       password: this.password.value
@@ -79,3 +84,5 @@ export default class SignIn extends React.Component {
     );
   }
 }
+
+export default SignIn;

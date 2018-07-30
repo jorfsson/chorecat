@@ -5,6 +5,13 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from 'axios';
 
+//This component is a button which opens a dialog box that asks the user
+//if they are sure they want to reset the calendar. Resetting the calendar
+//removes all records from the completedChores table in the database.
+//Future functionality should keep a history of completed chores from previous weeks,
+//while changing the Calendar component to be a new week with no completed chores. 
+//The Calendar component would ideally be a paginated table.
+
 class CalendarReset extends React.Component {
   constructor(props) {
     super(props);

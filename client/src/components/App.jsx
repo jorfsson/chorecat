@@ -8,6 +8,11 @@ import Button from '@material-ui/core/Button';
 import * as d3 from 'd3';
 import CalendarReset from './CalendarReset.jsx';
 
+//This component should only be accessed by users who are signed in.
+//Currently, if the user is not signed in and attempts to access /app,
+//the user will see errors in the console and a blank page.
+//Authenticated route needs to be built in order to direct users to
+//login page if not signed in.
 
 class App extends React.Component {
   constructor(props) {
@@ -112,6 +117,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        {/* UserInput is commented out because sending invite links only
+        makes sense if you have an actual link that isn't localhost */}
         {/* <UserInput fetchAllUsers={this.fetchAllUsers}/> */}
         <ChoreInput fetchAllChores={this.fetchAllChores}/>
         <CalendarReset fetchAllCompletedChores={this.fetchAllCompletedChores}/>

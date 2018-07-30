@@ -9,6 +9,19 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from 'axios';
 
+//The ChoreRow component populates ChoreCell components.
+//The first cell in the ChoreRow is the name of the chore. Upon mouseenter,
+//you can click the X icon to open a dialog box which asks if you are sure
+//that you want to delete that chore (and therefore, the row). 
+//The rest of the cells are related to the days of the week, which is why we
+//map through the array [0, 1, 2, 3, 4, 5, 6] which are the dayIds associated
+//with each day of the week. As we map through that array, we look at the
+//completedBy array which contains tuples of the user who completed the
+//chore associated with the current ChoreRow as well as the day the chore
+//was completed. We do this so that we can pass down the username down to the
+//ChoreCell so that it can be rendered there.
+//Future functionality is to edit the chore name for the ChoreRow.
+
 class ChoreRow extends React.Component {
   constructor(props) {
     super(props);
