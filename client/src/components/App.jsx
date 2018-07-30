@@ -14,6 +14,17 @@ import CalendarReset from './CalendarReset.jsx';
 //Authenticated route needs to be built in order to direct users to
 //login page if not signed in.
 
+const titles = {
+  display: 'flex',
+  justifyContent: 'space-around',
+  fontFamily: `"Roboto", "Helvetica", "Arial", sans-serif`,
+}
+
+const pies = {
+  display: 'flex',
+  justifyContent: 'space-around'
+}
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -149,15 +160,19 @@ class App extends React.Component {
           completedChores={this.state.completedChores}
           fetchAllCompletedChores={this.fetchAllCompletedChores}
           fetchAllChores={this.fetchAllChores}/>
-        <text className="labels">Chores Per User</text>
-        <PieChart x={220} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
-          data={this.state.choresPerUser} typeText={"chore"} type={"user"} />
-        <text className="labels">Chores by Completed Quantity</text>
-        <PieChart x={220} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
-          data={this.state.ChoresByQuantity} typeText={"time"} type={"chore"} />
-        <text className="labels">Days with Most Chores</text>
-        <PieChart x={220} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
-          data={this.state.daysQuantity} typeText={"chore"} type={"day"} />
+        <div style={titles}>
+          <h4>Chores per user</h4>
+          <h4>Chores by completed quantity</h4>
+          <h4>Days with most chores</h4>
+        </div>
+        <div style={pies}>
+          <PieChart x={220} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
+            data={this.state.choresPerUser} typeText={"chore"} type={"user"} />
+          <PieChart x={220} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
+            data={this.state.ChoresByQuantity} typeText={"time"} type={"chore"} />
+          <PieChart x={220} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
+            data={this.state.daysQuantity} typeText={"chore"} type={"day"} />
+        </div>
       </div>
     )
   }
