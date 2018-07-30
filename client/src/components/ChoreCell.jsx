@@ -11,6 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Icon from '@material-ui/core/Icon';
+import Chip from '@material-ui/core/Chip';
 import axios from 'axios';
 
 //The ChoreCell component allows you to mark a chore as complete.
@@ -34,6 +35,7 @@ class ChoreCell extends React.Component {
     this.mouseEnter = this.mouseEnter.bind(this);
     this.mouseLeave = this.mouseLeave.bind(this);
     this.markAsComplete = this.markAsComplete.bind(this);
+    this.removeCompletedBy = this.removeCompletedBy.bind(this);
   }
 
   mouseEnter() {
@@ -69,11 +71,20 @@ class ChoreCell extends React.Component {
       .then(this.handleClose());
   }
 
+  removeCompletedBy(id) {
+    axios.delete(`/api/calendar/${id}`, {
+      params: {
+        completedChoreId: `${id}`
+      }
+    })
+      .then(this.props.fetchComplete());
+  }
+
   render() {
     return (
       <TableCell onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
-        {this.state.isMouseInside ? <Icon onClick={() => this.handleClickOpen(this.props.day)}>add_circle</Icon> : null}
-        {this.props.completedBy}
+        {this.state.isMouseInside && this.props.completedBy === '' ? <Icon onClick={() => this.handleClickOpen(this.props.day)}>add_circle</Icon> : null}
+        {this.props.completedBy !== '' ? <Chip label={this.props.completedBy} onDelete={() => this.removeCompletedBy(this.props.completedId)} /> : null}
         <div>
           <Dialog
             disableBackdropClick

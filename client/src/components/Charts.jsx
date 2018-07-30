@@ -9,14 +9,24 @@ import * as d3 from 'd3';
 class PieChart extends React.Component {
   constructor () {
     super();
+    /* D3 renders pie here in the PieChart constructor
+       'd' is an inherent property within d3 and refers
+       to the passed in data object. Current data object
+       is set with value/label keys. Value determines the
+       construction of the pie, while sort relies on label
+    */
     this.pie = d3.pie()
       .value((d)=>d.value)
       .sort(function(a, b) {
 		return a.label.localeCompare(b.label);
 	});
+    /* Refer to d3 scaleOrdinal specifications for color schema to be used */
     this.colors = d3.scaleOrdinal( d3.schemeBuPu[1, 5]);
   }
 
+  /* arcGenerator constructs each individual slice of the pie
+     Data is passed down through here
+  */
   arcGenerator(d, i) {
     return (
         <LabeledArc key={`arc-${i}`}
@@ -31,17 +41,18 @@ class PieChart extends React.Component {
   }
 
   render () {
+    /* Where pie is actually rendered */
     let pie = this.pie(this.props.data),
-      translate = `translate(${this.props.x}, ${this.props.y})`,
-      translateLabel = `translate(0, ${this.props.y + 300})`;
+      translate = `translate(${this.props.x}, ${this.props.y})`;
 
       return (
+        /* SVG is canvas is created here for entire chartData
+           arcGenerator is called on each passed in specific data Object
+        */
         <svg width="450" height="450">
-        <g transform={translate} style={{margin: "auto"}}>
-          {pie.map((d, i)=> {return this.arcGenerator(d, i)})}
-
-        </g>
-        <text className="labels" transform={translateLabel}>Chores Per User</text>
+          <g transform={translate} style={{margin: "auto"}}>
+            {pie.map((d, i)=> {return this.arcGenerator(d, i)})}
+          </g>
         </svg>
       )
   }

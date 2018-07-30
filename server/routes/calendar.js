@@ -1,12 +1,10 @@
 const express = require('express');
-const { completeChore } = require('../../database');
-const fetchAllCompletedChores = require('../../database').getAllCompletedChores;
-const clearAllChores = require('../../database').clearAllChores;
+const { completeChore, getAllCompletedChores, clearAllChores, deleteCompleted } = require('../../database');
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  fetchAllCompletedChores()
+  getAllCompletedChores()
     .then(rows => res.status(200).json(rows))
     .catch(err => console.error(`[error ID 61] GET calendar ${err}`));
 });
@@ -23,6 +21,17 @@ router.post('/', (req, res) => {
   }
 });
 
+// Delete a completed chore
+router.delete('/:completedChoreId', (req, res) => {
+  deleteCompleted(req.params.completedChoreId)
+    .then(console.log(req.params))
+    .then(res.send(`DELETED completedChoreId ${req.params.completedChoreId} success!`))
+    .catch((err) => {
+      console.error(`[error ID 64] delete completedChore: ${err}`);
+    });
+});
+
+// Delete all completed chores
 router.delete('/', (req, res) => {
   clearAllChores()
     .then(res.status(200).send())

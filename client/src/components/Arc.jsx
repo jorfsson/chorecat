@@ -18,6 +18,10 @@ class Arc extends React.Component {
     this.mouseLeave = this.mouseLeave.bind(this);
   }
 
+  /* Below increases/decreases the size of each arc
+     on mouseEnter/on mouseLeave
+     Also sets the opacity of each arc label
+  */
   mouseEnter() {
     this.setState({ isMouseInside: true, opacity: 1});
     this.arc.innerRadius(this.props.innerRadius * 1.2);
@@ -32,6 +36,7 @@ class Arc extends React.Component {
 
   render () {
     return (
+    /* Where the actual path is constructed */
     <path d={this.arc(this.props.data)}
       style={{fill: this.props.color}}
       onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}
@@ -41,6 +46,7 @@ class Arc extends React.Component {
 }
 
 class LabeledArc extends Arc {
+    //LabeledArc extends Arc and is a subclass
     constructor (props) {
       super(props);
       this.arc.innerRadius(this.props.innerRadius);
@@ -56,6 +62,7 @@ class LabeledArc extends Arc {
         6: "Saturday",
         7: "Sunday"
       }
+      //text to be rendered - tspan is required for formatting/styling
       this.firstLine = () =>{
         if (this.props.type === "user"){
           return (<tspan x='0' dy='1em' y="-15">{this.props.data.data.label} completed</tspan>)
@@ -70,6 +77,7 @@ class LabeledArc extends Arc {
     }
 
     componentWillUpdate(){
+      //Alters typeText quantity
       if (this.props.data.data.value > 1) {
         this.typeText = this.props.typeText + "s"
       } else {
@@ -79,8 +87,11 @@ class LabeledArc extends Arc {
 
     render() {
         return (
-            <g id={this.props.data.data.label}>
+            <g>
                 {super.render()}
+                /* Text below adds specific styling to label details
+                    firstLine and secondLine are functions for conditional rendering
+                  */
                 <text className="info" fontSize="1em"
                       textAnchor="middle" style={{
                         opacity: this.state.opacity,

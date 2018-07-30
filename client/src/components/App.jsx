@@ -167,15 +167,25 @@ class App extends React.Component {
           completedChores={this.state.completedChores}
           fetchAllCompletedChores={this.fetchAllCompletedChores}
           fetchAllChores={this.fetchAllChores}/>
+        {/* Div below contains styles for pies and titles
+            & renders PieChart react components that depend on d3
+            for each specified type
+        */}
         <div style={pies}>
           <div style={titles}>
             <h4>Chores per user</h4>
+            {/* X/Y coordinates determine where the SVG canvas and piechart
+                will be rendered. InnerRadius and outerRadius needs to be passed down
+                along with formatted data, type, etc.
+                typeText can probably be declared further down and doesn't need to be here.
+                Refer to Charts.jsx for PieChart specifications
+              */}
             <PieChart x={220} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
               data={this.state.choresPerUser} typeText={"chore"} type={"user"} />
           </div>
           <div style={titles}>
             <h4>Chores by completed quantity</h4>
-            <PieChart x={220} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
+            <PieChart x={230} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
               data={this.state.ChoresByQuantity} typeText={"time"} type={"chore"} />
           </div>
           <div style={titles}>

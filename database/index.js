@@ -62,6 +62,13 @@ const completeChore = (user_id, chore_id, day) =>
     })
   })
 
+const deleteCompleted = (completedChore_id) => 
+  new Promise((resolve, reject) => {
+    connection.query(`DELETE FROM completedChores WHERE ?`, {id: completedChore_id}, (err, results) => {
+      if (err) { reject(err) } else { resolve(results) }
+    })
+  })
+
 const findAll = (table) =>
   new Promise((resolve, reject) => {
     connection.query(`SELECT * FROM ${table} `, (err, results) => {
@@ -71,7 +78,9 @@ const findAll = (table) =>
 
 const getAllCompletedChores = () =>
   new Promise((resolve, reject) => {
-    connection.query(`SELECT users.user_name, chores.chore_name, completedChores.day FROM users INNER JOIN completedChores ON users.id = completedChores.user_id INNER JOIN chores ON completedChores.chore_id = chores.id`, (err, results) => {
+    connection.query(`SELECT completedChores.id, users.user_name, chores.chore_name, completedChores.day FROM users 
+      INNER JOIN completedChores ON users.id = completedChores.user_id 
+      INNER JOIN chores ON completedChores.chore_id = chores.id`, (err, results) => {
       if (err) { reject(err) } else { resolve(results) }
     })
   })
@@ -102,6 +111,7 @@ module.exports.editUser = editUser;
 module.exports.deleteUser = deleteUser;
 module.exports.completeChore = completeChore;
 module.exports.getAllCompletedChores = getAllCompletedChores;
+module.exports.deleteCompleted = deleteCompleted;
 module.exports.clearAllChores = clearAllChores;
 module.exports.findAll = findAll;
 module.exports.findUser = findUser;

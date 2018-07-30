@@ -93,12 +93,21 @@ class ChoreRow extends React.Component {
         </TableCell>
         {[0, 1, 2, 3, 4, 5, 6].map(dayId => {
           let completedBy = '';
-          this.props.completedBy.forEach(tuple => {
-            if (Number(tuple[1]) === dayId) {
-              completedBy = tuple[0];
+          let completedId = '';
+          this.props.completedBy.forEach(triple => {
+            if (Number(triple[1]) === dayId) {
+              completedBy = triple[0];
+              completedId = triple[2]
             }
           });
-          return <ChoreCell key={dayId} day={dayId} chore={this.props.chore} users={this.props.users} completedBy={completedBy} fetchComplete={this.props.fetchAllComplete} />
+          return <ChoreCell 
+            key={dayId} 
+            day={dayId} 
+            chore={this.props.chore} 
+            users={this.props.users} 
+            completedBy={completedBy} 
+            completedId={completedId} 
+            fetchComplete={this.props.fetchAllComplete} />
         }
         )}
       </TableRow>
