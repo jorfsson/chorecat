@@ -37,7 +37,7 @@ class PieChart extends React.Component {
 
       return (
         <svg width="450" height="450">
-        <g transform={translate}>
+        <g transform={translate} style={{margin: "auto"}}>
           {pie.map((d, i)=> {return this.arcGenerator(d, i)})}
 
         </g>

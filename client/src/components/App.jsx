@@ -15,14 +15,21 @@ import CalendarReset from './CalendarReset.jsx';
 //login page if not signed in.
 
 const titles = {
-  display: 'flex',
+  display: 'inline-block',
   justifyContent: 'space-around',
-  fontFamily: `"Roboto", "Helvetica", "Arial", sans-serif`,
+  fontFamily: `"Helvetica", "Arial", sans-serif`,
+  marginBottom: "-20px",
+  fontStyle: "italic",
+  textAlign: "center",
+  margin: "auto",
+  clear: "both"
 }
 
 const pies = {
-  display: 'flex',
-  justifyContent: 'space-around'
+  display: 'inline-flex',
+  justifyContent: 'space-around',
+  width: "100%",
+  margin: "auto"
 }
 
 class App extends React.Component {
@@ -160,18 +167,22 @@ class App extends React.Component {
           completedChores={this.state.completedChores}
           fetchAllCompletedChores={this.fetchAllCompletedChores}
           fetchAllChores={this.fetchAllChores}/>
-        <div style={titles}>
-          <h4>Chores per user</h4>
-          <h4>Chores by completed quantity</h4>
-          <h4>Days with most chores</h4>
-        </div>
         <div style={pies}>
-          <PieChart x={220} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
-            data={this.state.choresPerUser} typeText={"chore"} type={"user"} />
-          <PieChart x={220} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
-            data={this.state.ChoresByQuantity} typeText={"time"} type={"chore"} />
-          <PieChart x={220} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
-            data={this.state.daysQuantity} typeText={"chore"} type={"day"} />
+          <div style={titles}>
+            <h4>Chores per user</h4>
+            <PieChart x={220} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
+              data={this.state.choresPerUser} typeText={"chore"} type={"user"} />
+          </div>
+          <div style={titles}>
+            <h4>Chores by completed quantity</h4>
+            <PieChart x={220} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
+              data={this.state.ChoresByQuantity} typeText={"time"} type={"chore"} />
+          </div>
+          <div style={titles}>
+            <h4>Days with most chores</h4>
+            <PieChart x={220} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
+              data={this.state.daysQuantity} typeText={"chore"} type={"day"} />
+          </div>
         </div>
       </div>
     )
