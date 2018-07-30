@@ -12,7 +12,7 @@ import axios from 'axios';
 //The ChoreRow component populates ChoreCell components.
 //The first cell in the ChoreRow is the name of the chore. Upon mouseenter,
 //you can click the X icon to open a dialog box which asks if you are sure
-//that you want to delete that chore (and therefore, the row). 
+//that you want to delete that chore (and therefore, the row).
 //The rest of the cells are related to the days of the week, which is why we
 //map through the array [0, 1, 2, 3, 4, 5, 6] which are the dayIds associated
 //with each day of the week. As we map through that array, we look at the
@@ -52,8 +52,9 @@ class ChoreRow extends React.Component {
   };
 
   handleClose() {
-    this.props.fetchAllChores();
     this.setState({ open: false });
+    this.props.fetchAllChores();
+    this.props.fetchAllComplete();
   };
 
   deleteChore(id) {
@@ -65,7 +66,7 @@ class ChoreRow extends React.Component {
     })
       .then(this.handleClose());
   }
- 
+
   render() {
     return (
       <TableRow>

@@ -32,17 +32,19 @@ class PieChart extends React.Component {
 
   render () {
     let pie = this.pie(this.props.data),
-      translate = `translate(${this.props.x}, ${this.props.y})`;
+      translate = `translate(${this.props.x}, ${this.props.y})`,
+      translateLabel = `translate(0, ${this.props.y + 300})`;
 
       return (
         <svg width="450" height="450">
         <g transform={translate}>
           {pie.map((d, i)=> {return this.arcGenerator(d, i)})}
+
         </g>
+        <text className="labels" transform={translateLabel}>Chores Per User</text>
         </svg>
       )
   }
-
 }
 
 export default PieChart
