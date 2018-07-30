@@ -64,6 +64,14 @@ passport.deserializeUser((userId, done) => {
     .catch(err => done(err, null));
 });
 
+app.get('/api/verify', (req, res) => {
+  if (req.user) {
+    res.status(200).json({ userId: req.user[0].id });
+  } else {
+    res.status(401).send();
+  }
+});
+
 app.post('/api/login',
   passport.authenticate('local', { failureRedirect: '/meow' }),
   (req, res) => {
