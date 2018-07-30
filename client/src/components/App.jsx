@@ -22,7 +22,8 @@ class App extends React.Component {
       users: [],
       completedChores: [],
       choresPerUser: [],
-      ChoresByQuantity: []
+      ChoresByQuantity: [],
+      daysQuantity: []
     }
     this.fetchAllChores = this.fetchAllChores.bind(this);
     this.fetchAllUsers = this.fetchAllUsers.bind(this);
@@ -70,6 +71,7 @@ class App extends React.Component {
         });
           this.formatChoresPerUser();
           this.formatChoresByQuantity();
+          this.formatDaysQuantity();
       })
       .catch((err) => {
         console.error(err);
@@ -114,6 +116,25 @@ class App extends React.Component {
     })
   }
 
+  formatDaysQuantity() {
+    let chartData = {};
+    let daysQuantity = [];
+    this.state.completedChores.forEach((chore)=>{
+      let day = chore.day
+      if(chartData[day]) {
+        chartData[day]++
+      } else {
+        chartData[day] = 1
+      }
+    });
+    for (var i in chartData){
+      daysQuantity.push({value: chartData[i], label: i})
+    }
+    this.setState({
+      daysQuantity: daysQuantity
+    })
+  }
+
   render() {
     return (
       <div>
@@ -122,16 +143,21 @@ class App extends React.Component {
         {/* <UserInput fetchAllUsers={this.fetchAllUsers}/> */}
         <ChoreInput fetchAllChores={this.fetchAllChores}/>
         <CalendarReset fetchAllCompletedChores={this.fetchAllCompletedChores}/>
-        <Calendar 
+        <Calendar
           chores={this.state.chores}
-          users={this.state.users} 
-          completedChores={this.state.completedChores} 
+          users={this.state.users}
+          completedChores={this.state.completedChores}
           fetchAllCompletedChores={this.fetchAllCompletedChores}
           fetchAllChores={this.fetchAllChores}/>
+        Chores per user
         <PieChart x={220} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
-          data={this.state.choresPerUser} typeText={"chore"} />
+          data={this.state.choresPerUser} typeText={"chore"} type={"user"} />
+        Chores by completed quantity
         <PieChart x={220} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
-          data={this.state.ChoresByQuantity} typeText={"time"} />
+          data={this.state.ChoresByQuantity} typeText={"time"} type={"chore"} />
+        Days with most chores
+        <PieChart x={220} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
+          data={this.state.daysQuantity} typeText={"chore"} type={"day"} />
       </div>
     )
   }

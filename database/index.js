@@ -3,7 +3,7 @@ var mysql = require('mysql');
 var connection = mysql.createConnection({
   host: '127.0.0.1',
   user: 'root',
-  password: 'password',
+  password: '',
   //port: '/var/run/mysqld/mysqld.sock',
   // insecureauth: true,
   database: 'chorecat'
@@ -76,7 +76,7 @@ const getAllCompletedChores = () =>
     })
   })
 
-const clearAllChores = () => 
+const clearAllChores = () =>
   new Promise((resolve, reject) => {
     connection.query(`DELETE from completedChores`, (err, results) => {
       if (err) { reject(err) } else { resolve(results) }
