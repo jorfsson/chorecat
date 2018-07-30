@@ -25,9 +25,8 @@ class Index extends React.Component{
 
   checkLoginState() {
     axios.get('/api/verify')
-      .then(res => res.statusCode)
-      .then((statusCode) => {
-        if (statusCode === 200) {
+      .then((res) => {
+        if (res.status === 200) {
           this.setState({isLoggedIn: true})
         }
       })
@@ -63,10 +62,9 @@ class Index extends React.Component{
               <Redirect to="/login" />
             )} />
             <Route path="/app" render={props => (
-              <App />
-              // <div>
-              // { this.state.isLoggedIn ? <App /> : <Redirect to="/login" /> }
-              // </div>
+              <div>
+                {this.state.isLoggedIn ? <App /> : <SignIn router={props} isLoggedIn={this.state.isLoggedIn} onSignInSubmit={this.toggleLoginState} /> }
+              </div>
             )} />
           </Switch>
         </div>
