@@ -10,7 +10,10 @@ class PieChart extends React.Component {
   constructor () {
     super();
     this.pie = d3.pie()
-      .value((d)=>d.value);
+      .value((d)=>d.value)
+      .sort(function(a, b) {
+		return a.label.localeCompare(b.label);
+	});
     this.colors = d3.scaleOrdinal( d3.schemeBuPu[1, 5]);
   }
 
