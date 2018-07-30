@@ -1,4 +1,5 @@
 import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import TableCell from '@material-ui/core/TableCell';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -11,6 +12,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Icon from '@material-ui/core/Icon';
+import Chip from '@material-ui/core/Chip';
 import axios from 'axios';
 
 //The ChoreCell component allows you to mark a chore as complete.
@@ -18,6 +20,17 @@ import axios from 'axios';
 //to undo chore completion. Design-wise, the name would utilize the
 //Material UI chip component and upon mouseenter, you would see 
 //buttons to edit and undo.
+
+// const styles = theme => ({
+//   root: {
+//     display: 'flex',
+//     justifyContent: 'center',
+//     flexWrap: 'wrap',
+//   },
+//   chip: {
+//     margin: theme.spacing.unit,
+//   },
+// });
 
 class ChoreCell extends React.Component {
   constructor(props) {
@@ -70,10 +83,18 @@ class ChoreCell extends React.Component {
   }
 
   render() {
+    //const { classes } = this.props;
+    let chip;
+    if (this.props.completedBy !== '') {
+      chip = <Chip label={this.props.completedBy} />;
+    } else {
+      chip = null;
+    }
+
     return (
       <TableCell onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
         {this.state.isMouseInside ? <Icon onClick={() => this.handleClickOpen(this.props.day)}>add_circle</Icon> : null}
-        {this.props.completedBy}
+        {chip}
         <div>
           <Dialog
             disableBackdropClick
