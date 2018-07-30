@@ -25,7 +25,7 @@ CREATE TABLE completedChores (
   chore_id int NOT NULL,
   day VARCHAR(10) NOT NULL,
   PRIMARY KEY (ID),
-  FOREIGN KEY (user_id) REFERENCES users(id),
-  FOREIGN KEY (chore_id) REFERENCES chores(id),
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY (chore_id) REFERENCES chores(id) ON DELETE CASCADE,
   CONSTRAINT completedChore UNIQUE(user_id, chore_id, day)
 );
