@@ -21,7 +21,8 @@ class PieChart extends React.Component {
           innerRadius={this.props.innerRadius}
           outerRadius={this.props.outerRadius}
           cornerRadius={this.props.cornerRadius}
-          type={this.props.typeText}
+          typeText={this.props.typeText}
+          type={this.props.type}
           color={this.colors(i)} />
     )
   }
