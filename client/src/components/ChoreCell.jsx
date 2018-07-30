@@ -1,5 +1,4 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import TableCell from '@material-ui/core/TableCell';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -21,17 +20,6 @@ import axios from 'axios';
 //Material UI chip component and upon mouseenter, you would see 
 //buttons to edit and undo.
 
-// const styles = theme => ({
-//   root: {
-//     display: 'flex',
-//     justifyContent: 'center',
-//     flexWrap: 'wrap',
-//   },
-//   chip: {
-//     margin: theme.spacing.unit,
-//   },
-// });
-
 class ChoreCell extends React.Component {
   constructor(props) {
     super(props);
@@ -47,6 +35,7 @@ class ChoreCell extends React.Component {
     this.mouseEnter = this.mouseEnter.bind(this);
     this.mouseLeave = this.mouseLeave.bind(this);
     this.markAsComplete = this.markAsComplete.bind(this);
+    this.removeCompletedBy = this.removeCompletedBy.bind(this);
   }
 
   mouseEnter() {
@@ -82,19 +71,20 @@ class ChoreCell extends React.Component {
       .then(this.handleClose());
   }
 
-  render() {
-    //const { classes } = this.props;
-    let chip;
-    if (this.props.completedBy !== '') {
-      chip = <Chip label={this.props.completedBy} />;
-    } else {
-      chip = null;
-    }
+  removeCompletedBy(id) {
+    axios.delete(`/api/calendar/${id}`, {
+      params: {
+        completedChoreId: `${id}`
+      }
+    })
+      .then(this.props.fetchComplete());
+  }
 
+  render() {
     return (
       <TableCell onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
-        {this.state.isMouseInside ? <Icon onClick={() => this.handleClickOpen(this.props.day)}>add_circle</Icon> : null}
-        {chip}
+        {this.state.isMouseInside && this.props.completedBy === '' ? <Icon onClick={() => this.handleClickOpen(this.props.day)}>add_circle</Icon> : null}
+        {this.props.completedBy !== '' ? <Chip label={this.props.completedBy} onDelete={() => this.removeCompletedBy(this.props.completedId)} /> : null}
         <div>
           <Dialog
             disableBackdropClick

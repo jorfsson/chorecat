@@ -1,5 +1,5 @@
 const express = require('express');
-const { completeChore, getAllCompletedChores, clearAllChores } = require('../../database');
+const { completeChore, getAllCompletedChores, clearAllChores, deleteCompleted } = require('../../database');
 
 const router = express.Router();
 
@@ -21,6 +21,17 @@ router.post('/', (req, res) => {
   }
 });
 
+// Delete a completed chore
+router.delete('/:completedChoreId', (req, res) => {
+  deleteCompleted(req.params.completedChoreId)
+    .then(console.log(req.params))
+    .then(res.send(`DELETED completedChoreId ${req.params.completedChoreId} success!`))
+    .catch((err) => {
+      console.error(`[error ID 64] delete completedChore: ${err}`);
+    });
+});
+
+// Delete all completed chores
 router.delete('/', (req, res) => {
   clearAllChores()
     .then(res.status(200).send())
