@@ -28,7 +28,6 @@ class Arc extends React.Component {
     this.setState({ isMouseInside: false, opacity: 0});
     this.arc.innerRadius(this.props.innerRadius);
     this.arc.outerRadius(this.props.outerRadius);
-
   }
 
   render () {
@@ -57,12 +56,6 @@ class LabeledArc extends Arc {
         6: "Saturday",
         7: "Sunday"
       }
-      console.log(this.props.typeText, 'hello')
-      if (this.props.data.data.value > 1) {
-        this.typeText = this.props.typeText + "s"
-      } else {
-        this.typeText = this.props.typeText
-      }
       this.firstLine = () =>{
         if (this.props.type === "user"){
           return (<tspan x='0' dy='1em' y="-15">{this.props.data.data.label} completed</tspan>)
@@ -72,8 +65,16 @@ class LabeledArc extends Arc {
           return (<tspan x='0' dy='1em' y="-15">{this.days[this.props.data.data.label]}</tspan>)
         }
       }
-      this.secondLine = () =>
-       (<tspan x='0' dy='1em'>({this.props.data.data.value}) {this.typeText}</tspan>)
+      this.secondLine = (text) =>
+       (<tspan x='0' dy='1em'>({this.props.data.data.value}) {text}</tspan>)
+    }
+
+    componentWillUpdate(){
+      if (this.props.data.data.value > 1) {
+        this.typeText = this.props.typeText + "s"
+      } else {
+        this.typeText = this.props.typeText
+      }
     }
 
     render() {
@@ -87,7 +88,7 @@ class LabeledArc extends Arc {
                         fontColor: this.props.color
                       }}>
                       {this.firstLine()}
-                      {this.secondLine()}
+                      {this.secondLine(this.typeText)}
                 </text>
             </g>
         );
