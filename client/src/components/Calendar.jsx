@@ -14,11 +14,11 @@ import TableBody from '@material-ui/core/TableBody';
 //so that they can be used in ChoreCell.
 //As each chore is being mapped to a ChoreRow, it also loops through the array of
 //completedChores. If the completedChores array contains a chore that matches the
-//chore associated with the ChoreRow, it will pass down an array of tuples which
-//contains the name of the user who completed the chore and the dayId (a number).
-//These tuples will be used in the ChoreRow component and passed down to the 
-//ChoreCell component in order to render the names of users who completed that chore
-//on the specified day. Basically, we are rendering the database on the client. 
+//chore associated with the ChoreRow, it will pass down an array of triples which
+//contains the name of the user who completed the chore, the dayId (a number), and.
+//completedChoreId. These tuples will be used in the ChoreRow component and passed down  
+//to the ChoreCell component in order to render the names of users who completed that
+//chore on the specified day. Basically, we are rendering the database on the client.
 
 class Calendar extends React.Component {
   constructor(props) {
@@ -46,7 +46,7 @@ class Calendar extends React.Component {
               let completedBy = [];
               this.props.completedChores.forEach(completed => {
                 if (completed["chore_name"] === chore["chore_name"]) {
-                  completedBy.push([completed["user_name"], completed.day]);
+                  completedBy.push([completed["user_name"], completed.day, completed.id]);
                 }
               });
               return <ChoreRow 
