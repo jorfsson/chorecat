@@ -149,13 +149,13 @@ class App extends React.Component {
           completedChores={this.state.completedChores}
           fetchAllCompletedChores={this.fetchAllCompletedChores}
           fetchAllChores={this.fetchAllChores}/>
-        Chores per user
+        <text className="labels">Chores Per User</text>
         <PieChart x={220} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
           data={this.state.choresPerUser} typeText={"chore"} type={"user"} />
-        Chores by completed quantity
+        <text className="labels">Chores by Completed Quantity</text>
         <PieChart x={220} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
           data={this.state.ChoresByQuantity} typeText={"time"} type={"chore"} />
-        Days with most chores
+        <text className="labels">Days with Most Chores</text>
         <PieChart x={220} y={220} outerRadius={175} innerRadius={75} cornerRadius={5}
           data={this.state.daysQuantity} typeText={"chore"} type={"day"} />
       </div>
