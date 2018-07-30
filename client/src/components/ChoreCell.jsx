@@ -13,6 +13,12 @@ import Select from '@material-ui/core/Select';
 import Icon from '@material-ui/core/Icon';
 import axios from 'axios';
 
+//The ChoreCell component allows you to mark a chore as complete.
+//Future functionality should be to edit who completed the chore,
+//to undo chore completion. Design-wise, the name would utilize the
+//Material UI chip component and upon mouseenter, you would see 
+//buttons to edit and undo.
+
 class ChoreCell extends React.Component {
   constructor(props) {
     super(props);
@@ -28,7 +34,6 @@ class ChoreCell extends React.Component {
     this.mouseEnter = this.mouseEnter.bind(this);
     this.mouseLeave = this.mouseLeave.bind(this);
     this.markAsComplete = this.markAsComplete.bind(this);
-    //this.findUserFromId = this.findUserFromId.bind(this);
   }
 
   mouseEnter() {

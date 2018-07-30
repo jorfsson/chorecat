@@ -1,6 +1,11 @@
 import React from 'react';
 import * as d3 from 'd3';
 import $ from 'jquery';
+
+//This component shows what percentage of chores each user has completed.
+//Charts component imports this Arc component in order to generate 
+//each slice of the pie chart.
+
 class Arc extends React.Component {
   constructor (props) {
     super(props);
@@ -69,4 +74,4 @@ class LabeledArc extends Arc {
     }
 }
 
-export default LabeledArc
+export default LabeledArc;

@@ -2,6 +2,10 @@ import React from 'react';
 import LabeledArc from './Arc.jsx';
 import * as d3 from 'd3';
 
+//The PieChart component renders a pie chart which shows the percentage
+//of chores each user has completed. Ideally, these user-facing analytics
+//would live on their own dashboard component or page and not on the App.
+
 class PieChart extends React.Component {
   constructor () {
     super();

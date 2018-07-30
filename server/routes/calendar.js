@@ -1,6 +1,7 @@
 const express = require('express');
 const { completeChore } = require('../../database');
 const fetchAllCompletedChores = require('../../database').getAllCompletedChores;
+const clearAllChores = require('../../database').clearAllChores;
 
 const router = express.Router();
 
@@ -20,6 +21,12 @@ router.post('/', (req, res) => {
       .then(res.status(201).send())
       .catch(err => console.error(`[error ID 62] POST calendar ${err}`));
   }
+});
+
+router.delete('/', (req, res) => {
+  clearAllChores()
+    .then(res.status(200).send())
+    .catch(err => console.error(`[error ID 63] DELETE calendar ${err}`));
 });
 
 module.exports = router;

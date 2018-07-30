@@ -6,7 +6,7 @@ import ButtonAppBar from './components/ButtonAppBar.jsx';
 import SignIn from './components/SignIn.jsx';
 import SignUp from './components/SignUp.jsx';
 
-
+//Index component contains routes
 class Index extends React.Component{
   constructor(props) {
     super(props);
@@ -18,7 +18,10 @@ class Index extends React.Component{
   }
 
   toggleLoginState(e) {
-    this.setState({isLoggedIn: true});
+    this.setState({isLoggedIn: true}, () => {
+      return (
+        <Redirect to="/app" />
+      )});
   }
 
   toggleLogoutState(e) {
@@ -42,6 +45,9 @@ class Index extends React.Component{
             )} />
             <Route path="/app" render={props => (
               <App />
+              // <div>
+              // { this.state.isLoggedIn ? <App /> : <Redirect to="/login" /> }
+              // </div>
             )} />
           </Switch>
         </div>

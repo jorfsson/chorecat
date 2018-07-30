@@ -32,6 +32,7 @@ router.put('/:choreId', (req, res) => {
 
 router.delete('/:choreId', (req, res) => {
   db.deleteChore(req.params.choreId)
+    .then(console.log(req.params))
     .then(res.send(`DELETED choreId ${req.params.choreId} success!`))
     .catch((err) => {
       console.error(`[error ID 54] delete chore ${req.body.name}: ${err}`);

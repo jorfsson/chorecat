@@ -3,7 +3,7 @@ var mysql = require('mysql');
 var connection = mysql.createConnection({
   host: '127.0.0.1',
   user: 'root',
-  password: '',
+  password: 'password',
   //port: '/var/run/mysqld/mysqld.sock',
   // insecureauth: true,
   database: 'chorecat'
@@ -76,6 +76,13 @@ const getAllCompletedChores = () =>
     })
   })
 
+const clearAllChores = () => 
+  new Promise((resolve, reject) => {
+    connection.query(`DELETE from completedChores`, (err, results) => {
+      if (err) { reject(err) } else { resolve(results) }
+    })
+  })
+
 const findUser = (params, data) =>
   new Promise((resolve, reject) => {
     connection.query(`SELECT ?? FROM users WHERE ?`, [params, data], (err, results) => {
@@ -93,9 +100,9 @@ module.exports.editUser = editUser;
 module.exports.deleteUser = deleteUser;
 module.exports.completeChore = completeChore;
 module.exports.getAllCompletedChores = getAllCompletedChores;
+module.exports.clearAllChores = clearAllChores;
 module.exports.findAll = findAll;
 module.exports.findUser = findUser;
-module.exports.getAllCompletedChores = getAllCompletedChores;
 //Consider deleting a user and how that might affect list table
 //Have to consider how adding a chore, editing a chore, deleting a chore affects tables
 //Have to consider how adding a user, editing a user, deleting a user affects tables
