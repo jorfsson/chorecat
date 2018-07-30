@@ -5,6 +5,7 @@ import App from './components/App.jsx';
 import ButtonAppBar from './components/ButtonAppBar.jsx';
 import SignIn from './components/SignIn.jsx';
 import SignUp from './components/SignUp.jsx';
+import axios from 'axios';
 
 //Index component contains routes
 class Index extends React.Component{
@@ -15,6 +16,24 @@ class Index extends React.Component{
     }
     this.toggleLoginState = this.toggleLoginState.bind(this);
     this.toggleLogoutState = this.toggleLogoutState.bind(this);
+    this.checkLoginState = this.checkLoginState.bind(this);
+  }
+
+  componentDidMount() {
+    this.checkLoginState();
+  }
+
+  checkLoginState() {
+    axios.get('/api/verify')
+      .then(res => res.statusCode)
+      .then((statusCode) => {
+        if (statusCode === 200) {
+          this.setState({isLoggedIn: true})
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
 
   toggleLoginState(e) {

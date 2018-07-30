@@ -57,7 +57,6 @@ class ChoreRow extends React.Component {
   };
 
   deleteChore(id) {
-    console.log(`chore id is: ${id}`);
     axios.delete(`/api/chores/${id}`, {
       params: {
         choreId: `${id}`
